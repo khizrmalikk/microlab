@@ -1,0 +1,12 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "server/json-simple-1.1.1.jar",
+        "server/junit-platform-console-standalone-1.8.2.jar",
+        "server/sqlite-jdbc-3.7.2.jar",
+        "ExampleClient/jSerialComm-2.9.2.jar",
+        "ExampleClient/JavaSerial-0.12.jar",
+        "ExampleClient/jSerialComm-2.7.0-javadoc.jar",
+        "ExampleClient/jSerialComm-2.7.0-sources.jar"
+    ]
+}

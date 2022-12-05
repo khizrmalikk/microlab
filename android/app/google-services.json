@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "173322487200",
+    "project_id": "microlab-412c7",
+    "storage_bucket": "microlab-412c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:173322487200:android:e0f051a576fc44ee5710c5",
+        "android_client_info": {
+          "package_name": "com.example.microlab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "173322487200-m2t3llk4ta2eek851ckgdusbg4ra4lc5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWIhzluBCUBbyPSnkYoqY_YsvUsrDp5Ok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "173322487200-m2t3llk4ta2eek851ckgdusbg4ra4lc5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
