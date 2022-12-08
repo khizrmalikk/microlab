@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:microlab/Home/Location.dart';
 import 'Home/home.dart';
 import 'Compare/CompareZones.dart';
 
@@ -31,24 +32,24 @@ class NavBar extends StatelessWidget {
             },
           ),
           Divider(),
-          // ListTile(
-          //   leading: Icon(Icons.looks_one),
-          //   title: Text(
-          //     "Zone 1",
-          //     style: GoogleFonts.montserrat(
-          //       textStyle:
-          //           const TextStyle(color: Colors.white, letterSpacing: 5),
-          //     ),
-          //   ),
-          //   iconColor: Theme.of(context).primaryColor,
-          //   onTap: () {
-          //     Navigator.of(context).push(
-          //       MaterialPageRoute(
-          //         builder: (context) => Zone(zoneNo: 1),
-          //       ),
-          //     );
-          //   },
-          // ),
+          ListTile(
+            leading: Icon(Icons.map),
+            title: Text(
+              "Location",
+              style: GoogleFonts.montserrat(
+                textStyle:
+                    const TextStyle(color: Colors.white, letterSpacing: 5),
+              ),
+            ),
+            iconColor: Theme.of(context).primaryColor,
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => Location(),
+                ),
+              );
+            },
+          ),
           // ListTile(
           //   leading: Icon(Icons.looks_two),
           //   title: Text(

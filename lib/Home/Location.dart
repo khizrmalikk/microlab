@@ -1,30 +1,30 @@
-import 'dart:async';
 import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:microlab/Home/UserData.dart';
+import 'package:flutter/services.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import '../Chart/ZoneData.dart';
 import '/NavBar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 import '../Chart/developer_chart.dart';
+import 'UserData.dart';
 
 const List<Widget> meas = <Widget>[
   Text(' Temperature '),
   Text('Light'),
-  Text('Noise'),
-  Text('Doors'),
+  Text('Noise')
 ];
 
-class MyDesktopBody extends StatefulWidget {
-  const MyDesktopBody({super.key});
+class Location extends StatefulWidget {
+  const Location({super.key});
 
   @override
-  _MyDesktopBody createState() => _MyDesktopBody();
+  _Location createState() => _Location();
 }
 
-class _MyDesktopBody extends State<MyDesktopBody>
-    with TickerProviderStateMixin {
+class _Location extends State<Location> with TickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -195,168 +195,8 @@ class _MyDesktopBody extends State<MyDesktopBody>
       drawer: const NavBar(),
       body: Container(
         color: Theme.of(context).colorScheme.secondary,
-        child: Row(
+        child: Column(
           children: [
-            Expanded(
-              child: Center(
-                child: ListView(
-                  children: [
-                    const SizedBox(height: 15),
-                    Center(
-                      child: ToggleButtons(
-                        direction: vertical ? Axis.vertical : Axis.horizontal,
-                        onPressed: (int index) {
-                          setState(() {
-                            // The button that is tapped is set to true, and the others to false.
-                            print(index);
-                            for (int i = 0; i < measurements.length; i++) {
-                              measurements[i] = i == index;
-                            }
-                            if (index == 0) {
-                              mes = "T";
-                            }
-                            if (index == 1) {
-                              mes = "L";
-                            }
-                            if (index == 2) {
-                              mes = "N";
-                            }
-                            if (index == 3) {
-                              mes = "O";
-                            }
-                          });
-                        },
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(8)),
-                        selectedBorderColor: Color.fromARGB(255, 0, 0, 0),
-                        selectedColor: Colors.white,
-                        fillColor: Theme.of(context).primaryColor,
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        constraints: const BoxConstraints(
-                          minHeight: 40.0,
-                          minWidth: 80.0,
-                        ),
-                        isSelected: measurements,
-                        children: meas,
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                    FutureBuilder(
-                        future: getData("Zone1", mes),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: AspectRatio(
-                                    aspectRatio: 5 / 2,
-                                    child: DeveloperChart(
-                                      chartTitle: 'Zone 1',
-                                      tData: [],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            );
-                          } else if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: AspectRatio(
-                                aspectRatio: 5 / 2,
-                                child: DeveloperChart(
-                                  chartTitle: 'Zone 1',
-                                  tData: snapshot.requireData,
-                                ),
-                              ),
-                            );
-                          } else {
-                            return Text('State: ${snapshot.connectionState}');
-                          }
-                        }),
-                    FutureBuilder(
-                        future: getData("Zone2", mes),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: AspectRatio(
-                                    aspectRatio: 5 / 2,
-                                    child: DeveloperChart(
-                                      chartTitle: 'Zone 1',
-                                      tData: [],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            );
-                          } else if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: AspectRatio(
-                                aspectRatio: 5 / 2,
-                                child: DeveloperChart(
-                                  chartTitle: 'Zone 2',
-                                  tData: snapshot.requireData,
-                                ),
-                              ),
-                            );
-                          } else {
-                            return Text('State: ${snapshot.connectionState}');
-                          }
-                        }),
-                    FutureBuilder(
-                        future: getData("Zone3", mes),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: AspectRatio(
-                                    aspectRatio: 5 / 2,
-                                    child: DeveloperChart(
-                                      chartTitle: 'Zone 1',
-                                      tData: [],
-                                    ),
-                                  ),
-                                )
-                              ],
-                            );
-                          } else if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: AspectRatio(
-                                aspectRatio: 5 / 2,
-                                child: DeveloperChart(
-                                  chartTitle: 'Zone 3',
-                                  tData: snapshot.requireData,
-                                ),
-                              ),
-                            );
-                          } else {
-                            return Text('State: ${snapshot.connectionState}');
-                          }
-                        }),
-                  ],
-                ),
-              ),
-            ),
-            //Second Column
             Padding(
                 padding: const EdgeInsets.all(25.0),
                 child: Container(
@@ -438,7 +278,7 @@ class _MyDesktopBody extends State<MyDesktopBody>
                                                 .colorScheme
                                                 .secondary,
                                             percent:
-                                                snapshot.requireData.value / 255,
+                                                snapshot.requireData.value / 40,
                                             progressColor: Colors.red,
                                             circularStrokeCap:
                                                 CircularStrokeCap.round,
@@ -490,7 +330,7 @@ class _MyDesktopBody extends State<MyDesktopBody>
                                                 .secondary,
                                             percent:
                                                 snapshot.requireData.value /
-                                                    255,
+                                                    120,
                                             progressColor: Colors.blue,
                                             circularStrokeCap:
                                                 CircularStrokeCap.round,
@@ -761,9 +601,6 @@ class _MyDesktopBody extends State<MyDesktopBody>
                                   ),
                                 ),
                               );
-                            } else if(snapshot.requireData[1] > 0){
-                              _controller.forward();
-                              return Text("");
                             } 
                             else {
                               return Text('State: ${snapshot.connectionState}');
@@ -774,10 +611,8 @@ class _MyDesktopBody extends State<MyDesktopBody>
                       ],
                     ),
                   ),
-                )),
-          ],
-        ),
-      ),
-    );
+                ))]),
+                ),
+              );
   }
 }
